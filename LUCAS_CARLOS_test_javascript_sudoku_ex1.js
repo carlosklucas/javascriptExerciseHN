@@ -76,68 +76,6 @@ function to_be_verified(twoDimensionTable) {
             return cell.textContent = y;
         });
     });
-
-
-}
-//to_be_verified(to_check(array_number));
-
-// Ex2.1 - Create a JAVASCRIPT "F21" function which accepts 1 input parameter "A" of table type with 9 positions as input.
-function acceptsTable(checkTableType) {
-
-    let checkIsTable = true;
-
-    if (checkTableType.length === 9) {
-        //console.log('This table has 9 lines.');
-        checkIsTable = true;
-    } else {
-        //console.log(`The size should be with 9 lines but instead has ${checkTableType.length}. Please, correct.`);
-        checkIsTable = false;
-    }
-
-    let tableTwoDimensions = to_check(checkTableType);
-
-    //convert string to numbers
-    let convertToNumArr = [];
-    convertToNumArr = tableTwoDimensions.map((x) => {
-
-        //console.log(convertToNumArr);
-        return x.map((y) => {
-            return y = parseInt(y);
-            //console.log(`We have an issue at line ${i+1} position ${j+1}, element ${y}: is ${typeof isNum == "number"}`);
-        })
-    }
-    )
-    console.log(convertToNumArr.length);
-
-    let tableIsValid = true;
-    convertToNumArr.forEach((line, i) => {
-        line.forEach((orig, j) => {
-            line.forEach((next, k) => {
-
-                if (k !== j && orig === next) {
-                    tableIsValid = false;
-                    //Ex3.1 Create a new function "F31" which calls the previous function "F21" for each line of the table "to_check". Display a relevant error message in the event of an anomaly, indicating in particular the line number in error and the values of the stations on the line. (see question n ° 4 and example of the anomaly table in the annex)
-                    console.log(`Element at row ${i + 1}, column ${j + 1} and ${k + 1}: Different? ${orig} and ${next}`);
-                }
-                
-                if (j !== k && convertToNumArr[j][i] === convertToNumArr[k][i]) {
-                    tableIsValid = false;
-                    //Ex3.1 Create a new function "F31" which calls the previous function "F21" for each line of the table "to_check". Display a relevant error message in the event of an anomaly, indicating in particular the line number in error and the values of the stations on the line. (see question n ° 4 and example of the anomaly table in the annex)
-                    console.log(`Element at column ${i + 1}, index ${j + 1} and ${k + 1}: Different? ${convertToNumArr[j][i]} and ${convertToNumArr[k][i]}`);
-                }
-            }
-            )
-
-        }
-        )
-    }
-
-);
-console.log (tableIsValid);
-// Ex2.3 The function must return true if the input array is good, false otherwise .
-return tableIsValid;
 }
 
-
-
-to_check_items(array_number);
+to_be_verified(to_check(array_number));
