@@ -58,7 +58,7 @@ to_check(array_number);
 function to_be_verified(twoDimensionTable) {
 
     // to access in HTML
-    var buildTable = document.getElementById("myTable");
+    var buildTable = document.getElementById("tableToVerify");
 
     //console.log(twoDimensionTable[0]);
     // iterates the inner arrays one by one with 9 elements (x as argument of each array)
