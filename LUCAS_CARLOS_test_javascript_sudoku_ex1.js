@@ -57,25 +57,40 @@ to_check(array_number);
 // Ex1.3 Then insert a function "F12" allowing to display the content of the table "to be verified", in the form of an HTML table (9x9)
 function to_be_verified(twoDimensionTable) {
 
-    // to access in HTML
     var buildTable = document.getElementById("tableToVerify");
 
-    //console.log(twoDimensionTable[0]);
-    // iterates the inner arrays one by one with 9 elements (x as argument of each array)
-    twoDimensionTable.forEach(x => {
+    var text = '<table>';
 
-        // create one row after each innner array (x)
-        var row = buildTable.insertRow();
+    // iterates the inner arrays one by one with 9 elements (x as argument of each array)
+    twoDimensionTable.forEach((line, indexLine) => {
+
+        if (indexLine % 3 === 0) {
+                text += '<tr style="border-top: 3px solid black; border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black;">';
+            }
+            else if ((indexLine+1) === 9) {
+                text += '<tr style="border-top: 1px solid black; border-left: 3px solid black; border-right: 3px solid black; border-bottom: 3px solid black;">';
+            } else {
+                text += '<tr style="border-top: 1px solid black; border-left: 3px solid black; border-right: 3px solid black; border-bottom: 1px solid black;">';
+            }
+
 
         // we iterate in each array each elements (y as the argument of each element in each array)
-        return x.forEach(y => {
+        line.forEach((elem, posElem) => {
 
-            // we create a position in the row with the element y
-            var cell = row.insertCell();
-            // return the values
-            return cell.textContent = y;
+            if ((posElem+1) % 3 === 0) {
+                
+                text += '<td style="border-right: 3px solid black;">' + elem + '</td>';
+            } else {
+                text += '<td style="border: 1px solid black;">' + elem + '</td>';
+
+            }
         });
+        text += '</tr>';
     });
+
+    text += '</table>';
+
+    return buildTable.innerHTML = text;
 }
 
 to_be_verified(to_check(array_number));

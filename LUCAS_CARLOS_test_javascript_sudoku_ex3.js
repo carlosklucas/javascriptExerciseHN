@@ -79,24 +79,23 @@ function acceptsTable(checkTableType) {
                 if (k !== j && orig === next && invalidLine) {
                     tableIsValid = false;
                     invalidLine = false;
-                    anomaliesArr.push(`Line ${i+1} incorrect:`);
+                    anomaliesArr.push(`Line ${i + 1} incorrect:`);
                     for (let y = 0; y < line.length; y++) {
                         anomaliesArr.push(convertToNumArr[i][y]);
                     }
-                    //cell.content.text
                     //Ex3.1 Create a new function "F31" which calls the previous function "F21" for each line of the table "to_check". Display a relevant error message in the event of an anomaly, indicating in particular the line number in error and the values of the stations on the line. (see question n ° 4 and example of the anomaly table in the annex)
-                    console.log(`Different line numbers check: element at row ${i+1}, column ${j} and ${k}; diferent elements? ${orig} and ${next} is ${tableIsValid}`);
+                    console.log(`Different line numbers check: element at row ${i + 1}, column ${j} and ${k}; diferent elements? ${orig} and ${next} is ${tableIsValid}`);
                 }
 
                 if (j !== k && convertToNumArr[j][i] === convertToNumArr[k][i] && invalidColumn) {
                     tableIsValid = false;
                     invalidColumn = false;
-                    anomaliesArr.push(`Column ${i+1} incorrect:`);
+                    anomaliesArr.push(`Column ${i + 1} incorrect:`);
                     for (let z = 0; z < line.length; z++) {
                         anomaliesArr.push(convertToNumArr[z][i]);
                     }
                     //Ex3.1 Create a new function "F31" which calls the previous function "F21" for each line of the table "to_check". Display a relevant error message in the event of an anomaly, indicating in particular the line number in error and the values of the stations on the line. (see question n ° 4 and example of the anomaly table in the annex)
-                    console.log(`Different columns numbers check: element at column ${i+1}, index ${j} and ${k}: diferent elements? ${convertToNumArr[j][i]} and ${convertToNumArr[k][i]} is ${tableIsValid}`);
+                    console.log(`Different columns numbers check: element at column ${i + 1}, index ${j} and ${k}: diferent elements? ${convertToNumArr[j][i]} and ${convertToNumArr[k][i]} is ${tableIsValid}`);
                 }
             }
             )
@@ -130,39 +129,43 @@ function tableCheckAnomalies(getTableCheck) {
     if (!getTableCheck && !anamoliesObj.tableValidation) {
 
         var buildAnomaliesTable = document.getElementById("anomalies");
-        var row;
 
-        anamoliesObj.tableAnomalies.forEach(x => {
+        var text = '<table>';
+
+        anamoliesObj.tableAnomalies.forEach((x, ind) => {
 
             if (typeof x === 'string') {
-                row = buildAnomaliesTable.insertRow();
-                var cell = row.insertCell();
-                return cell.textContent = x;
+                text += '<tr style="border: 3px solid black;"> <td style="border: 3px solid black;">' + x + '</td>';
             } else {
-                var cell = row.insertCell();
-                return cell.textContent = x;
+                if (x.length - 1 === ind) {
+                    text += '<td style="border: 1px solid black;">' + x + '</td></tr>';
+                } else {
+                    text += '<td style="border: 1px solid black;">' + x + '</td>';
+                }
             }
         }
         )
 
         anamoliesObj.regionAnomalies.forEach(x => {
-            x.forEach(y => {
+            x.forEach((y, ind) => {
 
                 if (typeof y === 'string') {
-                    row = buildAnomaliesTable.insertRow();
-                    var cell = row.insertCell();
-                    return cell.textContent = y;
+                    text += '<tr style="border: 3px solid black;"> <td style="border: 3px solid black;">' + y + '</td>';
                 } else {
-                    var cell = row.insertCell();
-                    return cell.textContent = y;
+
+                    if (x.length - 1 === ind) {
+                        text += '<td style="border: 1px solid black;">' + y + '</td></tr>';
+                    } else {
+                        text += '<td style="border: 1px solid black;">' + y + '</td>';
+                    }
                 }
             })
 
         })
 
-    } else {
+        return buildAnomaliesTable.innerHTML = text;
 
-        var msgTableOk = document.getElementById("tableOk");
+    } else {
 
         return document.getElementById("tableOk").innerText = "the table is correct";
     }
@@ -177,7 +180,7 @@ function testRegion(regionTable) {
     let regionNumbers = 0;
     let regionIsValid = true;
     let isRegionReported = -1;
-  
+
     for (let regionChangeColumnCount = 0; regionChangeColumnCount < regionTable.length / 3; regionChangeColumnCount++) {
         const changeRegion = 3;
 
@@ -250,6 +253,6 @@ function pushRegionNumbers(regionNumberError, getTableError) {
             regionNumbersCheck++;
         }
     }
-    
+
     return regionErrorMsg;
 }
