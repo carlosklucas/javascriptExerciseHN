@@ -107,13 +107,13 @@ function acceptsTable(checkTableType) {
     }
     );
 
-    console.log('aquii '+tableIsValid);
+    console.log('aquii ' + tableIsValid);
     //Ex3.2 Repeat the operation again with a function "F33" which deals with each region of the table "checkbox". (see question n ° 4 and example of the anomaly table in the annex)
     regionErrors = testRegion(convertToNumArr);
     console.log(regionErrors.isRegionValid);
-    console.log('aquii '+ regionErrors.isRegionValid);
+    console.log('aquii ' + regionErrors.isRegionValid);
 
-    if(!regionErrors.isRegionValid) {
+    if (!regionErrors.isRegionValid) {
         tableIsValid = regionErrors.isRegionValid;
     }
     let regionResultMsg = regionErrors.regArr;
@@ -148,9 +148,9 @@ function tableCheckAnomalies(getTableCheck) {
         }
         )
 
-        anamoliesObj.regionAnomalies.forEach(x => { 
+        anamoliesObj.regionAnomalies.forEach(x => {
             x.forEach(y => {
-                
+
                 if (typeof y === 'string') {
                     row = buildAnomaliesTable.insertRow();
                     var cell = row.insertCell();
@@ -160,7 +160,7 @@ function tableCheckAnomalies(getTableCheck) {
                     return cell.textContent = y;
                 }
             })
-            
+
         })
 
     } else {
@@ -181,13 +181,12 @@ function testRegion(regionTable) {
     let regionNumbers = 0;
     let regionIsValid = true;
     let isRegionReported = -1;
-
-
+  
     for (let regionChangeColumnCount = 0; regionChangeColumnCount < regionTable.length / 3; regionChangeColumnCount++) {
         const changeRegion = 3;
 
         for (let regionChangeLineCount = 0; regionChangeLineCount < regionTable.length / 3; regionChangeLineCount++) {
-
+            console.log(regionNumbers + 'tou aqui');
             if (regionNumbers !== isRegionReported) {
 
                 for (let regionCount = 0; regionCount < regionTable.length / 3; regionCount++) {
@@ -223,13 +222,13 @@ function testRegion(regionTable) {
             }
             regionNumbers++;
         }
-        regionNumbers++;
+        console.log(regionNumbers + 'final')
     }
     console.log(regionErrorMsgArr);
 
     objRegionTest = {
-        isRegionValid : regionIsValid,
-        regArr : regionErrorMsgArr
+        isRegionValid: regionIsValid,
+        regArr: regionErrorMsgArr
     }
 
     return objRegionTest;
@@ -241,7 +240,7 @@ function pushRegionNumbers(regionNumberError, getTableError) {
     let regionErrorMsg = [];
     let regionNumbersCheck = 0;
     const changeRegionFactor = 3;
-    regionErrorMsg.push(`Region ${regionNumbersCheck} incorrect`);
+    regionErrorMsg.push(`Region ${regionNumberError + 1} incorrect`);
 
     for (let regionChangeColumnCount = 0; regionChangeColumnCount < getTableError.length / 3; regionChangeColumnCount++) {
         for (let regionChangeLineCount = 0; regionChangeLineCount < getTableError.length / 3; regionChangeLineCount++) {
@@ -250,6 +249,8 @@ function pushRegionNumbers(regionNumberError, getTableError) {
                 for (let regionCount = 0; regionCount < getTableError.length / 3; regionCount++) {
                     for (let lineRegion = 0; lineRegion < getTableError.length / 3; lineRegion++) {
 
+                        console.log(regionNumberError);
+                        console.log(regionNumbersCheck + 'é este');
                         let newElem = getTableError[regionCount + regionChangeColumnCount * changeRegionFactor][lineRegion + regionChangeLineCount * changeRegionFactor];
                         regionErrorMsg.push(newElem);
                     }
@@ -259,5 +260,6 @@ function pushRegionNumbers(regionNumberError, getTableError) {
         }
         regionNumbersCheck++;
     }
+    
     return regionErrorMsg;
 }
