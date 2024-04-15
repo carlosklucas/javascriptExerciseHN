@@ -79,24 +79,24 @@ function acceptsTable(checkTableType) {
                 if (k !== j && orig === next && invalidLine) {
                     tableIsValid = false;
                     invalidLine = false;
-                    anomaliesArr.push(`Line ${i} incorrect:`);
+                    anomaliesArr.push(`Line ${i+1} incorrect:`);
                     for (let y = 0; y < line.length; y++) {
                         anomaliesArr.push(convertToNumArr[i][y]);
                     }
                     //cell.content.text
                     //Ex3.1 Create a new function "F31" which calls the previous function "F21" for each line of the table "to_check". Display a relevant error message in the event of an anomaly, indicating in particular the line number in error and the values of the stations on the line. (see question n ° 4 and example of the anomaly table in the annex)
-                    console.log(`Different line numbers check: element at row ${i}, column ${j} and ${k}; diferent elements? ${orig} and ${next} is ${tableIsValid}`);
+                    console.log(`Different line numbers check: element at row ${i+1}, column ${j} and ${k}; diferent elements? ${orig} and ${next} is ${tableIsValid}`);
                 }
 
                 if (j !== k && convertToNumArr[j][i] === convertToNumArr[k][i] && invalidColumn) {
                     tableIsValid = false;
                     invalidColumn = false;
-                    anomaliesArr.push(`Column ${i} incorrect:`);
+                    anomaliesArr.push(`Column ${i+1} incorrect:`);
                     for (let z = 0; z < line.length; z++) {
                         anomaliesArr.push(convertToNumArr[z][i]);
                     }
                     //Ex3.1 Create a new function "F31" which calls the previous function "F21" for each line of the table "to_check". Display a relevant error message in the event of an anomaly, indicating in particular the line number in error and the values of the stations on the line. (see question n ° 4 and example of the anomaly table in the annex)
-                    console.log(`Different columns numbers check: element at column ${i}, index ${j} and ${k}: diferent elements? ${convertToNumArr[j][i]} and ${convertToNumArr[k][i]} is ${tableIsValid}`);
+                    console.log(`Different columns numbers check: element at column ${i+1}, index ${j} and ${k}: diferent elements? ${convertToNumArr[j][i]} and ${convertToNumArr[k][i]} is ${tableIsValid}`);
                 }
             }
             )
@@ -107,11 +107,8 @@ function acceptsTable(checkTableType) {
     }
     );
 
-    console.log('aquii ' + tableIsValid);
     //Ex3.2 Repeat the operation again with a function "F33" which deals with each region of the table "checkbox". (see question n ° 4 and example of the anomaly table in the annex)
     regionErrors = testRegion(convertToNumArr);
-    console.log(regionErrors.isRegionValid);
-    console.log('aquii ' + regionErrors.isRegionValid);
 
     if (!regionErrors.isRegionValid) {
         tableIsValid = regionErrors.isRegionValid;
@@ -165,7 +162,6 @@ function tableCheckAnomalies(getTableCheck) {
 
     } else {
 
-        console.log('AFSIBIUSAUIB');
         var msgTableOk = document.getElementById("tableOk");
 
         return document.getElementById("tableOk").innerText = "the table is correct";
@@ -186,7 +182,6 @@ function testRegion(regionTable) {
         const changeRegion = 3;
 
         for (let regionChangeLineCount = 0; regionChangeLineCount < regionTable.length / 3; regionChangeLineCount++) {
-            console.log(regionNumbers + 'tou aqui');
             if (regionNumbers !== isRegionReported) {
 
                 for (let regionCount = 0; regionCount < regionTable.length / 3; regionCount++) {
@@ -222,9 +217,7 @@ function testRegion(regionTable) {
             }
             regionNumbers++;
         }
-        console.log(regionNumbers + 'final')
     }
-    console.log(regionErrorMsgArr);
 
     objRegionTest = {
         isRegionValid: regionIsValid,
@@ -249,15 +242,13 @@ function pushRegionNumbers(regionNumberError, getTableError) {
                 for (let regionCount = 0; regionCount < getTableError.length / 3; regionCount++) {
                     for (let lineRegion = 0; lineRegion < getTableError.length / 3; lineRegion++) {
 
-                        console.log(regionNumberError);
-                        console.log(regionNumbersCheck + 'é este');
                         let newElem = getTableError[regionCount + regionChangeColumnCount * changeRegionFactor][lineRegion + regionChangeLineCount * changeRegionFactor];
                         regionErrorMsg.push(newElem);
                     }
                 }
             }
+            regionNumbersCheck++;
         }
-        regionNumbersCheck++;
     }
     
     return regionErrorMsg;
