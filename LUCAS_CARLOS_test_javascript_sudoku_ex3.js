@@ -256,7 +256,6 @@ function pushRegionNumbers(regionNumberError, getTableError) {
                     }
                 }
             }
-            regionNumbersCheck++;
         }
         regionNumbersCheck++;
     }
